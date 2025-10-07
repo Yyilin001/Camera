@@ -103,7 +103,7 @@ private extension DefaultCameraScreen.BottomBar {
     var isLightButtonActive: Bool {
         let value = parent.config.lightButtonAllowed
             && parent.hasLight
-            && parent.cameraManager.captureSession.isRunning
+//            && parent.cameraManager.captureSession.isRunning
             && !parent.isRecording
         
         print("isLightButtonActive -> lightButtonAllowed: \(parent.config.lightButtonAllowed), hasLight: \(parent.hasLight), isRunning: \(parent.cameraManager.captureSession.isRunning), isRecording: \(parent.isRecording) => \(value)")
@@ -113,7 +113,7 @@ private extension DefaultCameraScreen.BottomBar {
 
     var isCaptureButtonActive: Bool {
         let value = parent.config.captureButtonAllowed
-            && parent.cameraManager.captureSession.isRunning
+//            && parent.cameraManager.captureSession.isRunning
         
         print("isCaptureButtonActive -> captureButtonAllowed: \(parent.config.captureButtonAllowed), isRunning: \(parent.cameraManager.captureSession.isRunning) => \(value)")
         
@@ -122,7 +122,7 @@ private extension DefaultCameraScreen.BottomBar {
 
     var isChangeCameraPositionButtonActive: Bool {
         let value = parent.config.cameraPositionButtonAllowed
-            && parent.cameraManager.captureSession.isRunning
+//            && parent.cameraManager.captureSession.isRunning
             && !parent.isRecording
         
         print("isChangeCameraPositionButtonActive -> cameraPositionButtonAllowed: \(parent.config.cameraPositionButtonAllowed), isRunning: \(parent.cameraManager.captureSession.isRunning), isRecording: \(parent.isRecording) => \(value)")
