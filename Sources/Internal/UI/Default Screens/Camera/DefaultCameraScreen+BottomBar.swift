@@ -90,8 +90,43 @@ private extension DefaultCameraScreen.BottomBar {
     var changeCameraPositionButtonIconColor: Color { .init(.mijickBackgroundInverted) }
 }
 private extension DefaultCameraScreen.BottomBar {
-    var isOutputTypeSwitchActive: Bool { parent.config.cameraOutputSwitchAllowed && parent.cameraManager.captureSession.isRunning && !parent.isRecording }
-    var isLightButtonActive: Bool { parent.config.lightButtonAllowed && parent.hasLight && parent.cameraManager.captureSession.isRunning && !parent.isRecording }
-    var isCaptureButtonActive: Bool { parent.config.captureButtonAllowed && parent.cameraManager.captureSession.isRunning }
-    var isChangeCameraPositionButtonActive: Bool { parent.config.cameraPositionButtonAllowed && parent.cameraManager.captureSession.isRunning && !parent.isRecording }
+    var isOutputTypeSwitchActive: Bool {
+        let value = parent.config.cameraOutputSwitchAllowed
+            && parent.cameraManager.captureSession.isRunning
+            && !parent.isRecording
+        
+        print("isOutputTypeSwitchActive -> cameraOutputSwitchAllowed: \(parent.config.cameraOutputSwitchAllowed), isRunning: \(parent.cameraManager.captureSession.isRunning), isRecording: \(parent.isRecording) => \(value)")
+        
+        return value
+    }
+
+    var isLightButtonActive: Bool {
+        let value = parent.config.lightButtonAllowed
+            && parent.hasLight
+            && parent.cameraManager.captureSession.isRunning
+            && !parent.isRecording
+        
+        print("isLightButtonActive -> lightButtonAllowed: \(parent.config.lightButtonAllowed), hasLight: \(parent.hasLight), isRunning: \(parent.cameraManager.captureSession.isRunning), isRecording: \(parent.isRecording) => \(value)")
+        
+        return value
+    }
+
+    var isCaptureButtonActive: Bool {
+        let value = parent.config.captureButtonAllowed
+            && parent.cameraManager.captureSession.isRunning
+        
+        print("isCaptureButtonActive -> captureButtonAllowed: \(parent.config.captureButtonAllowed), isRunning: \(parent.cameraManager.captureSession.isRunning) => \(value)")
+        
+        return value
+    }
+
+    var isChangeCameraPositionButtonActive: Bool {
+        let value = parent.config.cameraPositionButtonAllowed
+            && parent.cameraManager.captureSession.isRunning
+            && !parent.isRecording
+        
+        print("isChangeCameraPositionButtonActive -> cameraPositionButtonAllowed: \(parent.config.cameraPositionButtonAllowed), isRunning: \(parent.cameraManager.captureSession.isRunning), isRecording: \(parent.isRecording) => \(value)")
+        
+        return value
+    }
 }
