@@ -4,19 +4,29 @@
 import PackageDescription
 
 let package = Package(
-    name: "MijickCamera",
-    platforms: [
-        .iOS(.v14)
-    ],
+    name: "YylMijickCamera",
+    platforms: [.iOS(.v14)],
     products: [
-        .library(name: "MijickCamera", targets: ["MijickCamera"]),
+        .library(
+            name: "YylMijickCamera",
+            targets: ["YylMijickCamera"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/Mijick/Timer", exact: "2.0.0")
     ],
     targets: [
-        .target(name: "MijickCamera", dependencies: [.product(name: "MijickTimer", package: "Timer")], path: "Sources", resources: [.process("Internal/Assets")]),
-        .testTarget(name: "MijickCameraTests", dependencies: ["MijickCamera"], path: "Tests")
+        .target(
+            name: "YylMijickCamera",
+            dependencies: [.product(name: "MijickTimer", package: "Timer")],
+            path: "Sources",
+            resources: [.process("Internal/Assets")]
+        ),
+        .testTarget(
+            name: "YylMijickCameraTests",
+            dependencies: ["YylMijickCamera"],
+            path: "Tests"
+        )
     ],
     swiftLanguageModes: [.v6]
 )
