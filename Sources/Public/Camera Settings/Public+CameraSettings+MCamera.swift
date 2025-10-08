@@ -8,24 +8,34 @@
 //
 //  Copyright ©2024 Mijick. All rights reserved.
 
-
-import SwiftUI
 import AVKit
-
-// MARK: Initializer
-public extension MCamera {
-    init() { self.init(manager: .init(
+import SwiftUI
+@MainActor
+final class SharedCameraManager {
+    static let shared = CameraManager(
         captureSession: AVCaptureSession(),
         captureDeviceInputType: AVCaptureDeviceInput.self
-    ))}
+    )
 }
 
+// MARK: Initializer
+
+public extension MCamera {
+    init() {
+        self.init(manager:
+                    SharedCameraManager.shared
+//                .init(
+//            captureSession: AVCaptureSession(),
+//            captureDeviceInputType: AVCaptureDeviceInput.self
+//            )
+        )
+    }
+}
 
 // MARK: - METHODS
 
-
-
 // MARK: Changing Default Screens
+
 public extension MCamera {
     /**
      Changes the camera screen to a selected one.
@@ -33,7 +43,6 @@ public extension MCamera {
      For more details and tips on creating your own **Camera Screen**, see the ``MCameraScreen`` documentation.
 
      - tip: To hide selected buttons and controls on the screen, use the method with DefaultCameraScreen as argument. For a code example, please refer to Usage -> Default Camera Screen Customization section.
-
 
      # Usage
 
@@ -77,7 +86,6 @@ public extension MCamera {
 
      - tip: To disable displaying captured media, call the method with a nil value.
 
-
      # Usage
 
      ## New Captured Media Screen
@@ -113,7 +121,6 @@ public extension MCamera {
 
      For more details and tips on creating your own **Error Screen**, see the ``MCameraErrorScreen`` documentation.
 
-
      ## Usage
      ```swift
      struct ContentView: View {
@@ -131,6 +138,7 @@ public extension MCamera {
 }
 
 // MARK: Changing Initial Values
+
 public extension MCamera {
     /**
      Changes the initial camera output type.
@@ -264,6 +272,7 @@ public extension MCamera {
 }
 
 // MARK: Actions
+
 public extension MCamera {
     /**
      Indicates how the MCamera can be closed.
@@ -272,7 +281,6 @@ public extension MCamera {
      ```swift
      struct ContentView: View {
         @State private var isSheetPresented: Bool = false
-
 
         var body: some View {
             Button(action: { isSheetPresented = true }) {
@@ -290,7 +298,7 @@ public extension MCamera {
      }
      ```
      */
-    func setCloseMCameraAction(_ action: @escaping () -> ()) -> Self { config.closeMCameraAction = action; return self }
+    func setCloseMCameraAction(_ action: @escaping () -> Void) -> Self { config.closeMCameraAction = action; return self }
 
     /**
      Defines action that is called when an image is captured.
@@ -299,7 +307,6 @@ public extension MCamera {
      See ``Controller`` for more information.
 
      - note: The action is called immediately if **Captured Media Screen** is nil, otherwise after the user accepts the photo.
-
 
      ## Usage
      ```swift
@@ -317,7 +324,7 @@ public extension MCamera {
      }
      ```
      */
-    func onImageCaptured(_ action: @escaping (UIImage, MCamera.Controller) -> ()) -> Self { config.imageCapturedAction = action; return self }
+    func onImageCaptured(_ action: @escaping (UIImage, MCamera.Controller) -> Void) -> Self { config.imageCapturedAction = action; return self }
 
     /**
      Defines action that is called when a video is captured.
@@ -326,7 +333,6 @@ public extension MCamera {
      See ``Controller`` for more information.
 
      - note: The action is called immediately if **Captured Media Screen** is nil, otherwise after the user accepts the video.
-
 
      ## Usage
      ```swift
@@ -344,10 +350,11 @@ public extension MCamera {
      }
      ```
      */
-    func onVideoCaptured(_ action: @escaping (URL, MCamera.Controller) -> ()) -> Self { config.videoCapturedAction = action; return self }
+    func onVideoCaptured(_ action: @escaping (URL, MCamera.Controller) -> Void) -> Self { config.videoCapturedAction = action; return self }
 }
 
 // MARK: Others
+
 public extension MCamera {
     /**
      Locks the screen in portrait mode when the Camera Screen is active.
