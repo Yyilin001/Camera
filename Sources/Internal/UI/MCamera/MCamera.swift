@@ -10,7 +10,6 @@
 
 
 import SwiftUI
-
 /**
  A view that displays a camera with state-specific screens.
 
