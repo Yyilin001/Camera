@@ -100,6 +100,10 @@ public struct MCamera: View {
             .onDisappear(perform: onDisappear)
             .onChange(of: manager.attributes.capturedMedia, perform: onCapturedMediaChange)
     }}
+    
+    public init(manager: CameraManager) {
+        self.manager = manager
+    }
 }
 private extension MCamera {
     @ViewBuilder func createContent() -> some View {

@@ -11,7 +11,7 @@
 
 import AVKit
 
-protocol CaptureDeviceInput: NSObject {
+public protocol CaptureDeviceInput: NSObject {
     // MARK: Attributes
     associatedtype CD: CaptureDevice
     var device: CD { get }

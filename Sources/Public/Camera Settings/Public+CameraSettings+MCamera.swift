@@ -10,24 +10,24 @@
 
 import AVKit
 import SwiftUI
-@MainActor
-final class SharedCameraManager {
-    static let shared = CameraManager(
-        captureSession: AVCaptureSession(),
-        captureDeviceInputType: AVCaptureDeviceInput.self
-    )
-}
+//@MainActor
+//final class SharedCameraManager {
+//    static let shared = CameraManager(
+//        captureSession: AVCaptureSession(),
+//        captureDeviceInputType: AVCaptureDeviceInput.self
+//    )
+//}
 
 // MARK: Initializer
 
 public extension MCamera {
     init() {
         self.init(manager:
-                    SharedCameraManager.shared
-//                .init(
-//            captureSession: AVCaptureSession(),
-//            captureDeviceInputType: AVCaptureDeviceInput.self
-//            )
+//                    SharedCameraManager.shared
+                .init(
+            captureSession: AVCaptureSession(),
+            captureDeviceInputType: AVCaptureDeviceInput.self
+            )
         )
     }
 }
